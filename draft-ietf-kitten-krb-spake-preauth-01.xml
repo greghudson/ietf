@@ -8,6 +8,7 @@
 <!ENTITY rfc5226 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5226.xml">
 <!ENTITY rfc6234 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6234.xml">
 <!ENTITY rfc6560 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6560.xml">
+<!ENTITY rfc6649 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6649.xml">
 <!ENTITY rfc7748 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7748.xml">
 <!ENTITY rfc8032 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8032.xml">
 <!ENTITY spake SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-irtf-cfrg-spake2-01.xml">
@@ -26,7 +27,7 @@
 <?rfc docmapping="yes"?>
 
 <rfc category="std" docName="draft-ietf-kitten-krb-spake-preauth-01"
-      ipr="trust200902">
+      ipr="trust200902" updates="3961">
   <front>
     <title abbrev="SPAKE Pre-Authentication">SPAKE Pre-Authentication</title>
 
@@ -184,8 +185,9 @@
       <t>The terms "encryption type", "required checksum mechanism", and
       "get_mic" are defined in <xref target="RFC3961"/>.</t>
       <t>The terms "FAST", "PA-FX-COOKIE", "KDC_ERR_PREAUTH_EXPIRED",
-      "KDC_ERR_MORE_PREAUTH_DATA_REQUIRED", "pre-authentication facility", and
-      "authentication set" are defined in <xref target="RFC6113"/>.</t>
+      "KDC_ERR_MORE_PREAUTH_DATA_REQUIRED", "KDC_ERR_PREAUTH_FAILED",
+      "pre-authentication facility", and "authentication set" are defined in
+      <xref target="RFC6113"/>.</t>
       <t>The <xref target="SPAKE"/> paper defines SPAKE as a family of two key
       exchange algorithms differing only in derivation of the final key. This
       mechanism uses a derivation similar to the second algorithm (SPAKE2)
@@ -221,6 +223,20 @@
         support the use of KDC_ERR_MORE_PREAUTH_DATA_REQUIRED, as described in
         <xref target="RFC6113"/> section 5.2.</t>
       </section>
+    </section>
+
+    <section title="Update to Checksum Specifications" anchor="cksumupdate">
+      <t><xref target="RFC3961"/> section 4 specifies the Kerberos checksum
+      algorithm profile.  It does not require checksums to be deterministic.
+      In practice, DES-based checksum types (deprecated by <xref
+      target="RFC6649"/>) use a random confounder; all other current checksum
+      types are deterministic.</t>
+      <t>Future checksum types required by an encryption type MUST be
+      deterministic.  All future checksum types SHOULD be deterministic.</t>
+      <t>This mechanism requires a deterministic checksum type for the
+      transcript checksum.  Therefore, a KDC MUST NOT offer this mechanism if
+      the initial reply key is of type des-cbc-crc, des-cbc-md4, or
+      des-cbc-md5.</t>
     </section>
 
     <section title="SPAKE Pre-Authentication Message Protocol">
@@ -457,11 +473,18 @@ KEY_USAGE_SPAKE_FACTOR                  65
         this optimization.</t>
 
         <t>Second, clients MAY skip the first pass and send an AS-REQ with a
-        PA-SPAKE PA-DATA element using the support choice. The KDC MUST
-        include a PA-ETYPE-INFO2 value within the METHOD-DATA of the
+        PA-SPAKE PA-DATA element using the support choice. If the KDC accepts
+        the support message and generates a challenge, it MUST include a
+        PA-ETYPE-INFO2 value within the METHOD-DATA of the
         KDC_ERR_MORE_PREAUTH_DATA_REQUIRED error response, as the client may
-        not otherwise be able to compute the initial reply key. KDCs MUST
-        support this optimization.</t>
+        not otherwise be able to compute the initial reply key. If the KDC
+        cannot continue with SPAKE (either because initial reply key type is
+        incompatible with SPAKE or because it does not support any of the
+        client's groups) but can offer other pre-authentication mechanisms, it
+        MUST respond with a KDC_ERR_PREAUTH_FAILED error containing
+        METHOD-DATA. A client supporting this optimization MUST continue after
+        a KDC_ERR_PREAUTH_FAILED error as described in <xref target="RFC6113"/>
+        section 2. KDCs MUST support this optimization.</t>
       </section>
     </section>
 
@@ -737,6 +760,10 @@ KEY_USAGE_SPAKE_FACTOR                  66
     </section>
 
     <section title="IANA Considerations">
+      <t>The notes for the "Kerberos Checksum Type Numbers" registry should be
+      updated with the following addition: "If the checksum algorithm is
+      non-deterministic, see [this document] <xref target="cksumupdate"/>."</t>
+
       <t>This document establishes two registries with the following
       procedure, in accordance with <xref target="RFC5226"/>:</t>
 
@@ -940,6 +967,7 @@ KEY_USAGE_SPAKE_FACTOR                  66
     <references title='Non-normative References'>
       &rfc6234;
       &rfc6560;
+      &rfc6649;
       <reference anchor="SPAKE">
         <front>
           <title>Simple Password-Based Encrypted Key Exchange Protocols</title>
