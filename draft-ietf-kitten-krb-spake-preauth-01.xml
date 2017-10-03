@@ -319,8 +319,9 @@ SPAKESupport ::= SEQUENCE {
         <t>Upon receipt of the support message, the KDC will select a
         group. The KDC SHOULD choose a group from the groups provided by the
         support message. However, if the support message does not contain any
-        group that is supported by the KDC, the KDC MAY select another group
-        in hopes that the client might support it.</t>
+        group that is supported by the KDC, the KDC MAY select another group in
+        hopes that the client might support it. Otherwise, the KDC MUST respond
+        with a KDC_ERR_PREAUTH_FAILED error.</t>
 
         <t>Once the KDC has selected a group, the KDC will reply to the client
         with a KDC_ERR_MORE_PREAUTH_DATA_REQUIRED error containing a PA-SPAKE
@@ -410,8 +411,8 @@ SPAKEResponse ::= SEQUENCE {
         use the pubkey to compute the SPAKE result, derive K'[1], and decrypt
         the factors field. If decryption is successful, the first factor is
         successfully validated. The KDC then validates the second factor. If
-        either factor fails to validate, the KDC SHOULD respond with an
-        appropriate KRB-ERROR message.</t>
+        either factor fails to validate, the KDC SHOULD respond with a
+        KDC_ERR_PREAUTH_FAILED error.</t>
 
         <t>If validation of the second factor requires further round-trips, the
         KDC MUST reply to the client with KDC_ERR_MORE_PREAUTH_DATA_REQUIRED
@@ -704,6 +705,16 @@ KEY_USAGE_SPAKE_TRANSCRIPT              66
 	timestamp. Client implementations SHOULD provide a configuration option
 	to disable encrypted timestamp on a per-realm basis to mitigate this
 	attack.</t>
+
+	<t>If the user enters the wrong password, the client might fall back to
+	encrypted timestamp after receiving a KDC_ERR_PREAUTH_FAILED error from
+	the KDC, if encrypted timestamp is offered by the KDC and not disabled
+	by client configuration. This fallback will enable a passive attacker
+	to mount an offline dictionary attack against the incorrect password,
+	which may be similar to the correct password. Client implementations
+	SHOULD assume that encrypted timestamp and encrypted challenge are
+	unlikely to succeed if SPAKE pre-authentication fails in the second
+	pass and no second factor was used.</t>
 
 	<t>Like any other pre-authentication mechanism using the client
 	long-term key, this pre-authentication mechanism does not prevent
