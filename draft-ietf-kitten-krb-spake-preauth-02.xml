@@ -26,7 +26,7 @@
 <?rfc autobreaks="yes"?>
 <?rfc docmapping="yes"?>
 
-<rfc category="std" docName="draft-ietf-kitten-krb-spake-preauth-01"
+<rfc category="std" docName="draft-ietf-kitten-krb-spake-preauth-02"
       ipr="trust200902" updates="3961">
   <front>
     <title abbrev="SPAKE Pre-Authentication">SPAKE Pre-Authentication</title>
@@ -51,7 +51,7 @@
       <address><email>ghudson@mit.edu</email></address>
     </author>
 
-    <date month="September" year="2017" />
+    <date month="October" year="2017" />
 
     <area>Security</area>
 
