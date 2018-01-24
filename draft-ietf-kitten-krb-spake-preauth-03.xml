@@ -264,7 +264,7 @@
       field of KRB-ERROR messages. All PA-DATA elements for this mechanism
       MUST use the following padata-type:
       <list style="hanging">
-        <t hangText="PA-SPAKE">TBD</t>
+        <t hangText="PA-SPAKE">151</t>
       </list>
       The padata-value for all PA-SPAKE PA-DATA values MUST be empty or
       contain a DER encoding for the ASN.1 type PA-SPAKE.</t>
@@ -770,6 +770,17 @@ KEY_USAGE_SPAKE_FACTOR                  66
     </section>
 
     <section title="IANA Considerations">
+      <t>IANA has assigned the following number for PA-SPAKE in the
+      "Pre-authentication and Typed Data" registry:</t>
+      <texttable>
+	<ttcol>Type</ttcol>
+	<ttcol>Value</ttcol>
+	<ttcol>Reference</ttcol>
+	<c>PA-SPAKE</c>
+	<c>151</c>
+	<c>[this document]</c>
+      </texttable>
+
       <t>The notes for the "Kerberos Checksum Type Numbers" registry should be
       updated with the following addition: "If the checksum algorithm is
       non-deterministic, see [this document] <xref target="cksumupdate"/>."</t>
