@@ -587,6 +587,35 @@ KEY_USAGE_SPAKE                         65
       omitted. The SF-NONE second factor always successfully validates.</t>
     </section>
 
+    <section title="Hint for Authentication Sets">
+      <t>If a KDC offers SPAKE pre-authentication as part of an authentication
+      set (<xref target="RFC6113"/> section 5.3), it MAY provide a pa-hint
+      value containing the DER encoding of the ASN.1 type PA-SPAKE-HINT, to
+      help the client determine whether SPAKE pre-authentication is likely to
+      succeed if the authentication set is chosen.</t>
+
+      <figure>
+	<artwork><![CDATA[
+PA-SPAKE-HINT ::= SEQUENCE {
+    groups      [0] SEQUENCE (SIZE(1..MAX)) OF Int32,
+    factors     [1] SEQUENCE (SIZE(1..MAX)) OF SPAKESecondFactor
+}
+]]></artwork>
+      </figure>
+
+      <t>The groups field indicates the KDC's supported groups. The factors
+      field indicates the KDC's supported second factors. The KDC MAY omit the
+      data field of values in the factors list.</t>
+
+      <t>A KDC MUST NOT include a PA-SPAKE-HINT message in a pa-value field;
+      hints must only be provided within authentication sets. A KDC SHOULD
+      include a hint if SPAKE pre-authentication is offered as the second or
+      later element of an authentication set.</t>
+
+      <t>The PA-SPAKE-HINT message is not part of the transcript, and does not
+      replace any part of the SPAKE message flow.</t>
+    </section>
+
     <section title="Security Considerations">
       <t>All of the security considerations from
       <xref target="I-D.irtf-cfrg-spake2">SPAKE</xref> apply here as well.</t>
@@ -614,6 +643,14 @@ KEY_USAGE_SPAKE                         65
         possible to exploit the untrustworthiness of the challenge to turn the
         client into an encryption or signing oracle, unless the attacker knows
         the client's long-term key.</t>
+
+	<t>Unless FAST is used, any PA-SPAKE-HINT messages included when SPAKE
+	is advertised in authentication sets are unauthenticated, and are not
+	protected by the transcript hash. Since hints do not replace any part
+	of the message flow, manipulation of hint messages can only affect the
+	client's decision to use or not use an authentication set, which could
+	more easily be accomplished by removing authentication sets
+	entirely.</t>
       </section>
 
       <section title="Side Channels">
@@ -1036,6 +1073,11 @@ PA-SPAKE ::= CHOICE {
     response    [2] SPAKEResponse,
     encdata     [3] EncryptedData,
     ...
+}
+
+PA-SPAKE-HINT ::= SEQUENCE {
+    groups      [0] SEQUENCE (SIZE(1..MAX)) OF Int32,
+    factors     [1] SEQUENCE (SIZE(1..MAX)) OF SPAKESecondFactor
 }
 
 END
