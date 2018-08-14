@@ -10,7 +10,7 @@
 <!ENTITY rfc6560 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6560.xml">
 <!ENTITY rfc7748 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7748.xml">
 <!ENTITY rfc8032 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8032.xml">
-<!ENTITY spake SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-irtf-cfrg-spake2-01.xml">
+<!ENTITY spake SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-irtf-cfrg-spake2-06.xml">
 <!ENTITY CCITT.X680.2002 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.CCITT.X680.2002.xml">
 <!ENTITY CCITT.X690.2002 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.CCITT.X690.2002.xml">
 ]>
@@ -486,7 +486,7 @@ KEY_USAGE_SPAKE                         65
       created by this document.</t>
       <t>The SPAKE algorithm requires a shared secret input w to be used as a
       scalar multiplier (see <xref target="I-D.irtf-cfrg-spake2"/> section
-      2). This value MUST be produced from the initial reply key as follows:
+      3). This value MUST be produced from the initial reply key as follows:
       <list style="numbers">
         <t>Determine the length of the multiplier octet string as defined in
         the IANA "Kerberos SPAKE Groups" registry created by this
@@ -539,7 +539,7 @@ KEY_USAGE_SPAKE                         65
 
     <section title="Key Derivation" anchor="keyderiv">
       <t>Implementations MUST NOT use the SPAKE result (denoted by K in
-      Section 2 of <xref target="I-D.irtf-cfrg-spake2">SPAKE</xref>) directly
+      Section 3 of <xref target="I-D.irtf-cfrg-spake2">SPAKE</xref>) directly
       for any cryptographic operation. Instead, the SPAKE result is used to
       derive keys K'[n] as defined in this section. This method differs
       slightly from the method used to generate K' in Section 3 of <xref
@@ -1087,10 +1087,10 @@ END
 
     <section title="SPAKE M and N Value Selection">
       <t>The M and N constants for the NIST groups are from <xref
-      target="I-D.irtf-cfrg-spake2"/> section 3.</t>
+      target="I-D.irtf-cfrg-spake2"/> section 4.</t>
       <t>The M and N constants for the edwards25519 group were
       generated using the algorithm from <xref
-      target="I-D.irtf-cfrg-spake2"/> section 3 and the seed strings
+      target="I-D.irtf-cfrg-spake2"/> section 4 and the seed strings
       "edwards25519 point generation seed (M)" and "edwards25519 point
       generation seed (N)".</t>
     </section>
