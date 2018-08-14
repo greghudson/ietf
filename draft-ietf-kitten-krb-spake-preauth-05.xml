@@ -5,11 +5,11 @@
 <!ENTITY rfc4120 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4120.xml">
 <!ENTITY rfc6113 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6113.xml">
 <!ENTITY rfc4120 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4120.xml">
-<!ENTITY rfc5226 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5226.xml">
 <!ENTITY rfc6234 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6234.xml">
 <!ENTITY rfc6560 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6560.xml">
 <!ENTITY rfc7748 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7748.xml">
 <!ENTITY rfc8032 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8032.xml">
+<!ENTITY rfc8126 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY spake SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-irtf-cfrg-spake2-06.xml">
 <!ENTITY CCITT.X680.2002 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.CCITT.X680.2002.xml">
 <!ENTITY CCITT.X690.2002 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml2/reference.CCITT.X690.2002.xml">
@@ -808,7 +808,7 @@ KEY_USAGE_SPAKE                         65
       </texttable>
 
       <t>This document establishes two registries with the following
-      procedure, in accordance with <xref target="RFC5226"/>:</t>
+      procedure, in accordance with <xref target="RFC8126"/>:</t>
 
       <t>Registry entries are to be evaluated using the Specification Required
       method.  All specifications must be be published prior to entry
@@ -991,11 +991,11 @@ KEY_USAGE_SPAKE                         65
       &rfc2119;
       &rfc3961;
       &rfc4120;
-      &rfc5226;
       &rfc6113;
       &rfc6234;
       &rfc7748;
       &rfc8032;
+      &rfc8126;
       &spake;
       &CCITT.X680.2002;
       &CCITT.X690.2002;
