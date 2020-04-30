@@ -644,11 +644,12 @@ PA-SPAKE-HINT ::= SEQUENCE {
         divisible by the cofactor, an attacker might be able to coerce values
         of K which are not members of the prime-order subgroup, and deduce a
         limited amount of information about w from the order of K.</t>
-        <t>The scalars x and y MUST be chosen uniformly, and must not be
-        reused. If an x or y value is reused for pre-authentications involving
-        two different client long-term keys, an attacker who observes both
-        authentications and knows one of the long-term keys can conduct an
-        offline dictionary attack to recover the other one.</t>
+        <t>The scalars x and y MUST be chosen uniformly, and must not be reused
+        for different initial reply keys. If an x or y value is reused for
+        pre-authentications involving two different initial reply keys, an
+        attacker who observes both authentications and knows one of the initial
+        reply keys can conduct an offline dictionary attack to recover the
+        other one.</t>
         <t>The M and N values for a group MUST NOT have known discrete logs. An
         attacker who knows the discrete log of M or N can perform an offline
         dictionary attack on passwords. It is therefore important to
@@ -681,8 +682,8 @@ PA-SPAKE-HINT ::= SEQUENCE {
         <t>Subsequent factor data, including the data in the response, are
         encrypted in a derivative of the shared secret K. Therefore, it is not
         possible to exploit the untrustworthiness of the challenge to turn the
-        client into an encryption or signing oracle, unless the attacker knows
-        the client's long-term key.</t>
+        client into an encryption or signing oracle for the second factor
+        credentials, unless the attacker knows the client's long-term key.</t>
 
         <t>Unless FAST is used, any PA-SPAKE-HINT messages included when SPAKE
         is advertised in authentication sets are unauthenticated, and are not
@@ -854,15 +855,19 @@ KEY_USAGE_SPAKE                         65
       <t>This document establishes two registries with the following
       procedure, in accordance with <xref target="RFC8126"/>:</t>
 
-      <t>Registry entries are to be evaluated using the Specification Required
-      method.  All specifications must be be published prior to entry
-      inclusion in the registry.  There will be a three-week review period by
-      Designated Experts on the krb5-spake-review@ietf.org mailing list.
-      Prior to the end of the review period, the Designated Experts must
-      approve or deny the request. This decision is to be conveyed to both the
-      IANA and the list, and should include reasonably detailed explanation in
-      the case of a denial as well as whether the request can be
-      resubmitted.</t>
+      <t>Registry entries are to be evaluated using the Specification
+      Required method. All specifications must be be published prior
+      to entry inclusion in the registry. Once published, they can be
+      submitted directly to the krb5-spake-review@ietf.org mailing
+      list, where there will be a three-week long review period by
+      Designated Experts.</t>
+
+      <t>Prior to the end of the review period, the Designated Experts
+      must approve or deny the request. This decision is conveyed to
+      both IANA and the submitter. Since the mailing list archives are
+      not public, it should include both a reasonably detailed
+      explanation in the case of a denial as well as whether the
+      request can be resubmitted.</t>
 
       <section title="Kerberos Second Factor Types">
         <t>This section species the IANA "Kerberos Second Factor Types"
@@ -980,7 +985,7 @@ KEY_USAGE_SPAKE                         65
             <c>&#8226;</c><c>ID Number: 2</c>
             <c>&#8226;</c><c>Name: P-256</c>
             <c>&#8226;</c><c>Specification: Section 2.4.2 of <xref target="SEC2"/></c>
-            <c>&#8226;</c><c>Serialization: Section 2.3.3 of <xref target="SEC1"/> (compressed)</c>
+            <c>&#8226;</c><c>Serialization: Section 2.3.3 of <xref target="SEC1"/> (compressed format)</c>
             <c>&#8226;</c><c>Multiplier Length: 32</c>
             <c>&#8226;</c><c>Multiplier Conversion: Section 2.3.8 of <xref target="SEC1"/></c>
             <c>&#8226;</c><c>SPAKE M Constant: 02886e2f97ace46e55ba9dd7242579f2993b64e16ef3dcab95afd497333d8fa12f</c>
@@ -993,7 +998,7 @@ KEY_USAGE_SPAKE                         65
             <c>&#8226;</c><c>ID Number: 3</c>
             <c>&#8226;</c><c>Name: P-384</c>
             <c>&#8226;</c><c>Specification: Section 2.5.1 of <xref target="SEC2"/></c>
-            <c>&#8226;</c><c>Serialization: Section 2.3.3 of <xref target="SEC1"/> (compressed)</c>
+            <c>&#8226;</c><c>Serialization: Section 2.3.3 of <xref target="SEC1"/> (compressed format)</c>
             <c>&#8226;</c><c>Multiplier Length: 48</c>
             <c>&#8226;</c><c>Multiplier Conversion: Section 2.3.8 of <xref target="SEC1"/></c>
             <c>&#8226;</c><c>SPAKE M Constant:
@@ -1010,7 +1015,7 @@ KEY_USAGE_SPAKE                         65
             <c>&#8226;</c><c>ID Number: 4</c>
             <c>&#8226;</c><c>Name: P-521</c>
             <c>&#8226;</c><c>Specification: Section 2.6.1 of <xref target="SEC2"/></c>
-            <c>&#8226;</c><c>Serialization: Section 2.3.3 of <xref target="SEC1"/> (compressed)</c>
+            <c>&#8226;</c><c>Serialization: Section 2.3.3 of <xref target="SEC1"/> (compressed format)</c>
             <c>&#8226;</c><c>Multiplier Length: 66</c>
             <c>&#8226;</c><c>Multiplier Conversion: Section 2.3.8 of <xref target="SEC1"/></c>
             <c>&#8226;</c><c>SPAKE M Constant:
