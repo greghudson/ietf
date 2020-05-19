@@ -51,7 +51,7 @@
       <address><email>ghudson@mit.edu</email></address>
     </author>
 
-    <date month="April" year="2020" />
+    <date month="May" year="2020" />
 
     <area>Security</area>
 
@@ -75,7 +75,7 @@
   <middle>
     <section title="Introduction">
       <t>When a client uses PA-ENC-TIMESTAMP (or similar schemes, or the KDC
-      does not require preauthentication), a passive attacker that observes
+      does not require pre-authentication), a passive attacker that observes
       either the AS-REQ or AS-REP can perform an offline brute-force attack
       against the transferred ciphertext.  When the client principal's
       long-term key is based on a password, offline dictionary attacks can
@@ -98,9 +98,11 @@
       </section>
 
       <section title="PAKE Algorithm Selection">
-        <t>The SPAKE algorithm works by encrypting the public keys of a
-        Diffie-Hellman key exchange with a shared secret.  SPAKE was selected
-        for this pre-authentication mechanism for the following properties:
+        <t>The SPAKE algorithm (defined in <xref
+        target="conventions"/>) works by encrypting the public keys of
+        a Diffie-Hellman key exchange with a shared secret.  SPAKE was
+        selected for this pre-authentication mechanism for the
+        following properties:
         <list style="numbers">
           <t>Because SPAKE's encryption method ensures that the result is a
           member of the underlying group, it can be used with elliptic curve
@@ -141,7 +143,7 @@
         prevent timing attacks, then an online brute-force attack cannot be
         used to attack the factors separately.</t>
 
-        <t>For these reasons, this draft departs from the advice given in
+        <t>For these reasons, this document departs from the advice given in
         Section 1 of <xref target="RFC6113">RFC 6113</xref> which states that
         "Mechanism designers should design FAST factors, instead of new
         pre-authentication mechanisms outside of FAST." However, this
@@ -171,7 +173,7 @@
       </section>
     </section>
 
-    <section title="Document Conventions">
+    <section title="Document Conventions" anchor="conventions">
       <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
       "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
       "OPTIONAL" in this document are to be interpreted as described in BCP 14
@@ -560,8 +562,8 @@ KEY_USAGE_SPAKE                         65
       directly for any cryptographic operation. Instead, the SPAKE result is
       used to derive keys K'[n] as defined in this section.</t>
 
-      <t>First, the hash function associated with the selected group is
-      computed over the concatenation of the following values:
+      <t>First, compute the hash function associated with the selected group
+      over the concatenation of the following values:
       <list style="symbols">
         <t>The fixed string "SPAKEkey".</t>
         <t>The group number as a big-endian four-byte two's complement binary
@@ -905,7 +907,7 @@ KEY_USAGE_SPAKE                         65
             <ttcol /><ttcol />
             <c>&#8226;</c><c>ID Number: 1</c>
             <c>&#8226;</c><c>Name: SF-NONE</c>
-            <c>&#8226;</c><c>Reference: this draft.</c>
+            <c>&#8226;</c><c>Reference: this document.</c>
           </texttable>
         </section>
       </section>
