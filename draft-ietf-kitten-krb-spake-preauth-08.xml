@@ -63,11 +63,11 @@
       document has three goals. First, increase the security of Kerberos
       pre-authentication exchanges by making offline brute-force attacks
       infeasible.  Second, enable the use of second factor authentication
-      without relying on FAST. This is achieved using the existing trust
-      relationship established by the shared first factor. Third, make
-      Kerberos pre-authentication more resilient against time synchronization
-      errors by removing the need to transfer an encrypted timestamp from the
-      client.
+      without the need for a separately-established secure channel.  This is
+      achieved using the existing trust relationship established by the shared
+      first factor. Third, make Kerberos pre-authentication more resilient
+      against time synchronization errors by removing the need to transfer an
+      encrypted timestamp from the client.
       </t>
     </abstract>
   </front>
