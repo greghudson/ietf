@@ -26,7 +26,7 @@
 <?rfc autobreaks="yes"?>
 <?rfc docmapping="yes"?>
 
-<rfc category="std" docName="draft-ietf-kitten-krb-spake-preauth-07"
+<rfc category="std" docName="draft-ietf-kitten-krb-spake-preauth-08"
       ipr="trust200902">
   <front>
     <title abbrev="SPAKE Pre-Authentication">SPAKE Pre-Authentication</title>
