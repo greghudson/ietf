@@ -864,12 +864,23 @@ KEY_USAGE_SPAKE                         65
       list, where there will be a three-week long review period by
       Designated Experts.</t>
 
+      <t>The Designated Experts ensure that the specification is publicly
+      available.  It is sufficient to have an Internet-Draft (that is posted
+      and never published as an RFC) or a document from another standards
+      body, industry consortium, university site, etc.  The Designated Experts
+      may provide additional in-depth reviews, but their approval should not
+      be taken as endorsement of the specification.</t>
+
       <t>Prior to the end of the review period, the Designated Experts
       must approve or deny the request. This decision is conveyed to
       both IANA and the submitter. Since the mailing list archives are
       not public, it should include both a reasonably detailed
       explanation in the case of a denial as well as whether the
       request can be resubmitted.</t>
+
+      <t>IANA MUST only accept registry updates from the designated experts
+      and SHOULD direct all requests for registration to the review mailing
+      list.</t>
 
       <section title="Kerberos Second Factor Types">
         <t>This section species the IANA "Kerberos Second Factor Types"
